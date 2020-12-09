@@ -35,12 +35,15 @@ class Source(Base):
 
     def _candidate(self, tag):
         filename = tag['filename']
-        path_name = os.path.split(filename)
+        tag['path'] = filename.replace(
+                util.path2project(self.vim, filename, None),
+                ''
+                )
         line = re.sub('\/\^|\$\/', '', tag['cmd'])
 
         return {
-                'word' : '{}/{}     {}'.format(util.truncate(self.vim, path_name[0], 50), path_name[1], line),
-                'abbr' : '{}/{}     {}'.format(util.truncate(self.vim, path_name[0], 50), path_name[1], line),
+                'word' : tag['name'],
+                'abbr' : '{cmd:<35} {path}'.format(**tag),
                 'action__path' : filename,
                 'action__text' : line,
                 'action__pattern' : line
