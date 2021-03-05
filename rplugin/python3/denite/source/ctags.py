@@ -39,11 +39,12 @@ class Source(Base):
                 util.path2project(self.vim, filename, None),
                 ''
                 )
+        tag['path'] = util.truncate(self.vim, tag['path'], 50);
         line = re.sub('\/\^|\$\/', '', tag['cmd'])
 
         return {
                 'word' : tag['name'],
-                'abbr' : '{cmd:<35} {path}'.format(**tag),
+                'abbr' : '{path:<50} {cmd}'.format(**tag),
                 'action__path' : filename,
                 'action__text' : line,
                 'action__pattern' : line
