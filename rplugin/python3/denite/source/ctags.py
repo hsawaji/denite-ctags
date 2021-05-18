@@ -40,7 +40,7 @@ class Source(Base):
                 ''
                 )
         tag['path'] = util.truncate(self.vim, tag['path'], 50);
-        line = re.sub('\/\^|\$\/', '', tag['cmd'])
+        line = tag['cmd'][1:-1]
 
         return {
                 'word' : tag['name'],
