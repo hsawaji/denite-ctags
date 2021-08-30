@@ -43,7 +43,7 @@ class Source(Base):
         line = tag['cmd'][1:-1]
 
         return {
-                'word' : tag['name'],
+                'word' : '{path} {cmd}'.format(**tag),
                 'abbr' : '{path:<50} {cmd}'.format(**tag),
                 'action__path' : filename,
                 'action__text' : line,
